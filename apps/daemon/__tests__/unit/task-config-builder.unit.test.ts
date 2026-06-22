@@ -127,6 +127,7 @@ vi.mock('@accomplish_ai/agent-core/storage/repositories/index', async () => {
       language: undefined,
     })),
     getActiveProviderModel: vi.fn(() => activeProviderModel),
+    getSelectedModel: vi.fn(() => activeProviderModel),
     getConnectedProviderIds: vi.fn(() => []),
     getOllamaConfig: vi.fn(() => null),
     getLMStudioConfig: vi.fn(() => null),
@@ -269,6 +270,40 @@ describe('daemon onBeforeStart — integration against real resolveTaskConfig + 
     expect(result.workspaceInstructions).toContain('Always add "Haiku" suffix to every reply');
     // Env is still populated as before — not clobbered by the new field.
     expect(result.env.OPENCODE_CONFIG).toBeDefined();
+  });
+
+  it('passes provider API keys into the opencode serve environment', async () => {
+    const storage = makeStorage({
+      getAllApiKeys: vi.fn(async () => ({
+        openai: 'sk-test-openai',
+        openrouter: 'sk-or-test-openrouter',
+      })),
+      getApiKey: vi.fn((provider: string) => {
+        if (provider === 'openai') {
+          return 'sk-test-openai';
+        }
+        if (provider === 'openrouter') {
+          return 'sk-or-test-openrouter';
+        }
+        return null;
+      }),
+    });
+
+    const result = await onBeforeStart(
+      storage as never,
+      {
+        userDataPath: tmpUserData,
+        mcpToolsPath: fakeMcpToolsPath,
+        isPackaged: false,
+        resourcesPath: '',
+        appPath: '',
+      },
+      { taskId: 'tsk_openrouter_env', workspaceId: undefined },
+    );
+
+    expect(result.env.OPENROUTER_API_KEY).toBe('sk-or-test-openrouter');
+    expect(result.env.OPENAI_API_KEY).toBe('sk-test-openai');
+    expect(result.env.ACCOMPLISH_TASK_ID).toBe('tsk_openrouter_env');
   });
 
   it('omits workspaceInstructions when no instruction-type notes exist (context/reference only)', async () => {

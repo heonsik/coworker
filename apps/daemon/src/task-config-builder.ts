@@ -13,6 +13,7 @@ import {
   syncApiKeysToOpenCodeAuth,
   getOpenCodeAuthJsonPath,
   getBundledNodePaths,
+  buildOpenCodeEnvironment,
   getEnabledSkills,
   type StorageAPI,
   type CliResolverConfig,
@@ -188,10 +189,16 @@ export async function onBeforeStart(
   // helper used to do this; the SDK adapter still needs it because
   // `opencode serve` is launched by `OpenCodeServerManager.spawnOpenCodeServer`
   // through the same shell shim.
-  const env: NodeJS.ProcessEnv = {
-    OPENCODE_CONFIG: result.configPath,
-    OPENCODE_CONFIG_DIR: path.dirname(result.configPath),
-  };
+  const env = buildOpenCodeEnvironment(
+    {
+      OPENCODE_CONFIG: result.configPath,
+      OPENCODE_CONFIG_DIR: path.dirname(result.configPath),
+    },
+    {
+      apiKeys,
+      taskId: ctx.taskId,
+    },
+  );
   const bundledNodeBinPath = getBundledNodeBinPath(opts);
   if (bundledNodeBinPath) {
     env.PATH = `${bundledNodeBinPath}${path.delimiter}${process.env.PATH ?? ''}`;
