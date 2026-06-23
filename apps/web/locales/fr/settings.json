@@ -1,6 +1,6 @@
 {
   "title": "Paramètres",
-  "setupTitle": "Configurer Accomplish",
+  "setupTitle": "Configurer MOA",
   "model": {
     "title": "Modèle",
     "cloudProviders": "Fournisseurs cloud",
@@ -60,9 +60,9 @@
     "fireworks": "Fireworks AI",
     "groq": "Groq",
     "huggingface-local": "HuggingFace Local",
-    "accomplish-ai": "Accomplish AI",
+    "accomplish-ai": "MOA AI",
     "accomplishAi": {
-      "description": "Utilisez le modèle intégré propulsé par Accomplish - aucune clé API requise.\nInclut 200 crédits gratuits par mois pour commencer.",
+      "description": "Utilisez le modèle intégré propulsé par MOA - aucune clé API requise.\nInclut 200 crédits gratuits par mois pour commencer.",
       "disconnect": "Déconnecter",
       "exhaustedMessage": "Crédits épuisés. Ils seront réinitialisés le {{date}}.",
       "exhaustedMessageSoon": "Crédits épuisés. Ils seront réinitialisés bientôt."
@@ -332,7 +332,7 @@
   },
   "integrations": {
     "title": "Intégrations de messagerie",
-    "description": "Connectez des plateformes de messagerie pour déclencher des tâches Accomplish à distance. Une fois activé, vous pouvez démarrer et surveiller des tâches depuis votre téléphone ou n'importe quel appareil.",
+    "description": "Connectez des plateformes de messagerie pour déclencher des tâches MOA à distance. Une fois activé, vous pouvez démarrer et surveiller des tâches depuis votre téléphone ou n'importe quel appareil.",
     "enabled": "Activé",
     "messaging": "Messagerie",
     "comingSoon": "Bientôt disponible",
@@ -345,14 +345,14 @@
     "platforms": {
       "whatsapp": "Déclencher des tâches et recevoir des mises à jour via WhatsApp",
       "slack": "Connecter un espace de travail Slack pour la gestion des tâches",
-      "telegram": "Utiliser le bot Telegram pour interagir avec Accomplish",
+      "telegram": "Utiliser le bot Telegram pour interagir avec MOA",
       "teams": "Intégrer avec les canaux et chats Teams"
     },
     "whatsapp": {
       "connect": "Connecter WhatsApp",
       "scanQr": "Scannez le QR code ci-dessous avec votre application WhatsApp pour connecter cet appareil. Allez dans WhatsApp > Paramètres > Appareils liés > Lier un appareil.",
       "qrPlaceholder": "Le QR code apparaîtra ici lorsque le service WhatsApp démarrera",
-      "securityNotice": "En connectant WhatsApp, vous accordez à Accomplish l'accès à vos messages WhatsApp. Toutes les données restent sur votre appareil et ne sont pas partagées à l'extérieur."
+      "securityNotice": "En connectant WhatsApp, vous accordez à MOA l'accès à vos messages WhatsApp. Toutes les données restent sur votre appareil et ne sont pas partagées à l'extérieur."
     },
     "tabs": {
       "messaging": "Messagerie",
@@ -414,17 +414,41 @@
       "success": "POP3 connection succeeded. UIDL reported {{count}} message(s).",
       "successNoUidl": "POP3 login succeeded, but this server does not support UIDL.",
       "failed": "POP3 connection failed."
+    },
+    "inbox": {
+      "title": "Boîte de réception",
+      "allAccounts": "Tous les comptes",
+      "sync": "Synchroniser",
+      "syncing": "Synchronisation...",
+      "syncDone": "Synchronisé. {{count}} nouveau(x) message(s).",
+      "syncPartial": "{{count}} nouveau(x) message(s) synchronisé(s), {{failed}} compte(s) en échec.",
+      "syncFailed": "Échec de la synchronisation.",
+      "noEnabledAccounts": "Aucun compte activé à synchroniser.",
+      "searchPlaceholder": "Rechercher des courriels...",
+      "loading": "Chargement des messages...",
+      "loadFailed": "Échec du chargement des messages.",
+      "empty": "Aucun message.",
+      "noSelection": "Sélectionnez un message à lire.",
+      "noBody": "Ce message n'a pas de contenu texte.",
+      "to": "À",
+      "star": "Favori",
+      "archive": "Archiver",
+      "filters": {
+        "all": "Tous",
+        "unread": "Non lus",
+        "starred": "Favoris"
+      }
     }
   },
   "appearance": {
     "title": "Thème",
-    "description": "Choisissez l'apparence d'Accomplish. Sélectionnez Système pour correspondre aux paramètres de votre système d'exploitation.",
+    "description": "Choisissez l'apparence d'MOA. Sélectionnez Système pour correspondre aux paramètres de votre système d'exploitation.",
     "ariaLabel": "Préférence de thème",
     "system": "Système",
     "light": "Clair",
     "dark": "Sombre",
     "themeTitle": "Thème",
-    "themeDescription": "Choisissez l'apparence d'Accomplish. Sélectionnez Système pour correspondre aux paramètres de votre système d'exploitation.",
+    "themeDescription": "Choisissez l'apparence d'MOA. Sélectionnez Système pour correspondre aux paramètres de votre système d'exploitation.",
     "themeSystem": "Système",
     "themeLight": "Clair",
     "themeDark": "Sombre"
@@ -462,7 +486,7 @@
       "connecting": "Connecting...",
       "disconnect": "Disconnect",
       "disconnecting": "Disconnecting...",
-      "authHint": "Accomplish will open your browser to authorize access.",
+      "authHint": "MOA will open your browser to authorize access.",
       "pendingHint": "Authorization was started but not finished. Reconnect to try again.",
       "connectedHint": "Connected and ready for the agent to use.",
       "waitingForBrowser": "En attente du navigateur…"
@@ -477,7 +501,7 @@
       "restartAuth": "Relancer l'authentification",
       "disconnect": "Déconnecter Slack",
       "disconnecting": "Déconnexion...",
-      "authHint": "Accomplish ouvrira votre navigateur pour que vous puissiez approuver l'accès Slack.",
+      "authHint": "MOA ouvrira votre navigateur pour que vous puissiez approuver l'accès Slack.",
       "pendingHint": "Une connexion Slack a été initiée mais non terminée. Relancez-la pour réessayer.",
       "connectedHint": "Slack est authentifié et prêt à être utilisé par l'agent.",
       "authFailed": "Échec de l'authentification Slack",
@@ -503,7 +527,7 @@
     "monday": {
       "title": "monday.com",
       "description": "Let the agent manage boards, items, and updates in your monday.com workspace.",
-      "marketplaceHint": "Install the Accomplish app from the monday.com marketplace first.",
+      "marketplaceHint": "Install the MOA app from the monday.com marketplace first.",
       "marketplaceLink": "Open marketplace"
     },
     "lightdash": {
@@ -577,7 +601,7 @@
     "filterAll": "Toutes",
     "filterActive": "Actives",
     "filterInactive": "Inactives",
-    "byAccomplish": "Par Accomplish",
+    "byAccomplish": "Par MOA",
     "github": "GitHub",
     "builtByYou": "Créées par vous",
     "loading": "Chargement des compétences...",
@@ -592,7 +616,7 @@
     "showInFolder": "Afficher dans le dossier",
     "delete": "Supprimer",
     "add": "Ajouter",
-    "buildWithAccomplish": "Créer avec Accomplish",
+    "buildWithAccomplish": "Créer avec MOA",
     "buildDescription": "Créez des compétences par conversation",
     "uploadSkill": "Importer une compétence",
     "uploadDescription": "Sélectionnez un dossier de compétences à importer",
@@ -622,7 +646,7 @@
     "exported": "Exporté",
     "exportFailed": "Échec de l'exportation",
     "exportDialogTitle": "Exporter les journaux de l'application",
-    "exportHeader": "Journaux de l'application Accomplish\nExporté : {{timestamp}}\nRépertoire des journaux : {{logDir}}\n\nAucun journal enregistré.\n"
+    "exportHeader": "Journaux de l'application MOA\nExporté : {{timestamp}}\nRépertoire des journaux : {{logDir}}\n\nAucun journal enregistré.\n"
   },
   "language": {
     "title": "Langue",
@@ -637,13 +661,13 @@
   "about": {
     "title": "À propos",
     "version": "Version {{version}}",
-    "description": "Accomplish est un agent IA local pour votre Mac qui lit vos fichiers, crée des documents et automatise les tâches répétitives - le tout en open source avec les modèles d'IA de votre choix.",
+    "description": "MOA (Manufacturing Office by AI Portal) est un agent IA local pour votre Mac qui lit vos fichiers, crée des documents et automatise les tâches répétitives - le tout en open source avec les modèles d'IA de votre choix.",
     "contact": "Des questions ou des commentaires ? Cliquez ici pour nous contacter",
     "visitUs": "Visitez-nous",
     "haveQuestion": "Une question ?",
     "versionLabel": "Version",
     "loading": "Chargement...",
-    "allRightsReserved": "Accomplish™ Tous droits réservés."
+    "allRightsReserved": "MOA™ Tous droits réservés."
   },
   "warnings": {
     "noProviderReady": "Aucun fournisseur prêt",

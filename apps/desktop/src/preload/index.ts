@@ -29,6 +29,7 @@ import type {
   EmailConnectionTestResult,
   EmailMessage,
   EmailMessageListFilters,
+  EmailSyncRunResult,
   EmailSyncState,
   GoogleAccount,
   OAuthProviderId,
@@ -940,6 +941,8 @@ const accomplishAPI = {
       ipcRenderer.invoke('email:attachments:list', messageId),
     getSyncState: (accountId: string): Promise<EmailSyncState | null> =>
       ipcRenderer.invoke('email:sync:get-state', accountId),
+    runSync: (accountId: string): Promise<EmailSyncRunResult> =>
+      ipcRenderer.invoke('email:sync:run', accountId),
   },
 
   gws: {

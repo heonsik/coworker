@@ -1,6 +1,6 @@
 {
   "title": "设置",
-  "setupTitle": "设置 Accomplish",
+  "setupTitle": "设置 MOA",
   "model": {
     "title": "模型",
     "cloudProviders": "云服务商",
@@ -60,9 +60,9 @@
     "fireworks": "Fireworks AI",
     "groq": "Groq",
     "huggingface-local": "HuggingFace Local",
-    "accomplish-ai": "Accomplish AI",
+    "accomplish-ai": "MOA AI",
     "accomplishAi": {
-      "description": "使用 Accomplish 提供的内置模型 - 无需 API 密钥。\n每月包含 200 个免费额度。",
+      "description": "使用 MOA 提供的内置模型 - 无需 API 密钥。\n每月包含 200 个免费额度。",
       "disconnect": "断开连接",
       "exhaustedMessage": "额度已用完。将于 {{date}} 重置。",
       "exhaustedMessageSoon": "额度已用完。即将重置。"
@@ -250,7 +250,7 @@
   },
   "integrations": {
     "title": "消息平台集成",
-    "description": "连接消息平台以远程触发 Accomplish 任务。启用后，您可以从手机或任何设备上启动和监控任务。",
+    "description": "连接消息平台以远程触发 MOA 任务。启用后，您可以从手机或任何设备上启动和监控任务。",
     "enabled": "已启用",
     "messaging": "消息",
     "comingSoon": "即将推出",
@@ -263,14 +263,14 @@
     "platforms": {
       "whatsapp": "通过 WhatsApp 消息触发任务并接收更新",
       "slack": "连接 Slack 工作区进行任务管理",
-      "telegram": "使用 Telegram 机器人与 Accomplish 交互",
+      "telegram": "使用 Telegram 机器人与 MOA 交互",
       "teams": "与 Teams 频道和聊天集成"
     },
     "whatsapp": {
       "connect": "连接 WhatsApp",
       "scanQr": "使用您的 WhatsApp 应用扫描下方二维码以连接此设备。前往 WhatsApp > 设置 > 已关联的设备 > 关联设备。",
       "qrPlaceholder": "WhatsApp 服务启动后，二维码将显示在此处",
-      "securityNotice": "连接 WhatsApp 后，您将授予 Accomplish 访问您的 WhatsApp 消息的权限。所有数据保留在您的设备上，不会对外共享。"
+      "securityNotice": "连接 WhatsApp 后，您将授予 MOA 访问您的 WhatsApp 消息的权限。所有数据保留在您的设备上，不会对外共享。"
     },
     "tabs": {
       "messaging": "消息",
@@ -332,6 +332,30 @@
       "success": "POP3 connection succeeded. UIDL reported {{count}} message(s).",
       "successNoUidl": "POP3 login succeeded, but this server does not support UIDL.",
       "failed": "POP3 connection failed."
+    },
+    "inbox": {
+      "title": "收件箱",
+      "allAccounts": "所有账户",
+      "sync": "同步",
+      "syncing": "同步中...",
+      "syncDone": "已同步。{{count}} 封新邮件。",
+      "syncPartial": "已同步 {{count}} 封新邮件，{{failed}} 个账户失败。",
+      "syncFailed": "同步失败。",
+      "noEnabledAccounts": "没有可同步的已启用账户。",
+      "searchPlaceholder": "搜索邮件...",
+      "loading": "正在加载邮件...",
+      "loadFailed": "加载邮件失败。",
+      "empty": "没有邮件。",
+      "noSelection": "选择一封邮件以阅读。",
+      "noBody": "此邮件没有文本内容。",
+      "to": "收件人",
+      "star": "星标",
+      "archive": "归档",
+      "filters": {
+        "all": "全部",
+        "unread": "未读",
+        "starred": "星标"
+      }
     }
   },
   "notifications": {
@@ -390,20 +414,20 @@
   },
   "appearance": {
     "title": "主题",
-    "description": "选择 Accomplish 的外观。选择「系统」以匹配操作系统设置。",
+    "description": "选择 MOA 的外观。选择「系统」以匹配操作系统设置。",
     "ariaLabel": "主题偏好",
     "system": "系统",
     "light": "浅色",
     "dark": "深色",
     "themeTitle": "主题",
-    "themeDescription": "选择 Accomplish 的外观。选择「系统」以匹配操作系统设置。",
+    "themeDescription": "选择 MOA 的外观。选择「系统」以匹配操作系统设置。",
     "themeSystem": "跟随系统",
     "themeLight": "浅色",
     "themeDark": "深色"
   },
   "connectors": {
     "title": "连接器",
-    "description": "连接内置或自定义 MCP 服务器，让 Accomplish 可以使用外部工具。",
+    "description": "连接内置或自定义 MCP 服务器，让 MOA 可以使用外部工具。",
     "loading": "加载连接器...",
     "placeholder": "https://mcp-server.example.com",
     "add": "添加",
@@ -434,7 +458,7 @@
       "connecting": "Connecting...",
       "disconnect": "Disconnect",
       "disconnecting": "Disconnecting...",
-      "authHint": "Accomplish will open your browser to authorize access.",
+      "authHint": "MOA will open your browser to authorize access.",
       "pendingHint": "Authorization was started but not finished. Reconnect to try again.",
       "connectedHint": "Connected and ready for the agent to use.",
       "waitingForBrowser": "等待浏览器…"
@@ -449,7 +473,7 @@
       "restartAuth": "重新开始验证",
       "disconnect": "断开 Slack",
       "disconnecting": "断开中...",
-      "authHint": "Accomplish 会打开浏览器，供您完成 Slack 授权。",
+      "authHint": "MOA 会打开浏览器，供您完成 Slack 授权。",
       "pendingHint": "之前已开始 Slack 登录，但尚未完成。您可以重新开始一次。",
       "connectedHint": "Slack 已完成验证，智能体现在可以使用它。",
       "authFailed": "Slack 验证失败",
@@ -475,7 +499,7 @@
     "monday": {
       "title": "monday.com",
       "description": "Let the agent manage boards, items, and updates in your monday.com workspace.",
-      "marketplaceHint": "Install the Accomplish app from the monday.com marketplace first.",
+      "marketplaceHint": "Install the MOA app from the monday.com marketplace first.",
       "marketplaceLink": "Open marketplace"
     },
     "lightdash": {
@@ -577,7 +601,7 @@
     "filterAll": "全部",
     "filterActive": "已启用",
     "filterInactive": "已停用",
-    "byAccomplish": "由 Accomplish 提供",
+    "byAccomplish": "由 MOA 提供",
     "github": "GitHub",
     "builtByYou": "自建",
     "loading": "加载技能中...",
@@ -592,7 +616,7 @@
     "showInFolder": "在文件夹中显示",
     "delete": "删除",
     "add": "添加",
-    "buildWithAccomplish": "使用 Accomplish 构建",
+    "buildWithAccomplish": "使用 MOA 构建",
     "buildDescription": "通过对话创建技能",
     "uploadSkill": "上传技能",
     "uploadDescription": "选择技能文件夹以导入",
@@ -622,7 +646,7 @@
     "exported": "已导出",
     "exportFailed": "导出失败",
     "exportDialogTitle": "导出应用程序日志",
-    "exportHeader": "Accomplish 应用程序日志\n导出时间：{{timestamp}}\n日志目录：{{logDir}}\n\n暂无日志记录。\n"
+    "exportHeader": "MOA 应用程序日志\n导出时间：{{timestamp}}\n日志目录：{{logDir}}\n\n暂无日志记录。\n"
   },
   "language": {
     "title": "语言",
@@ -637,13 +661,13 @@
   "about": {
     "title": "关于",
     "version": "版本 {{version}}",
-    "description": "Accomplish 是一款本地计算机使用 AI 助手，适用于 Mac。它可以读取您的文件、创建文档并自动化重复性知识工作——完全开源，支持您选择的 AI 模型。",
+    "description": "MOA (Manufacturing Office by AI Portal) 是一款本地计算机使用 AI 助手，适用于 Mac。它可以读取您的文件、创建文档并自动化重复性知识工作——完全开源，支持您选择的 AI 模型。",
     "contact": "有问题或反馈？点击此处联系我们",
     "visitUs": "访问我们",
     "haveQuestion": "有问题？",
     "versionLabel": "版本",
     "loading": "加载中...",
-    "allRightsReserved": "Accomplish™ 保留所有权利。"
+    "allRightsReserved": "MOA™ 保留所有权利。"
   },
   "warnings": {
     "noProviderReady": "尚未配置服务商",

@@ -1,4 +1,5 @@
 {
+  "email": "Email",
   "newTask": "New task",
   "searchTasks": "Search Tasks (Cmd+K)",
   "noConversations": "No conversations yet",

@@ -431,7 +431,12 @@ export function EmailSettingsPanel() {
           </div>
         )}
       </section>
-      <Dialog open={deleteTarget !== null} onOpenChange={(open) => { if (!open) setDeleteTarget(null); }}>
+      <Dialog
+        open={deleteTarget !== null}
+        onOpenChange={(open) => {
+          if (!open) setDeleteTarget(null);
+        }}
+      >
         <DialogContent>
           <DialogHeader>
             <DialogTitle>{t('email.deleteDialog.title')}</DialogTitle>

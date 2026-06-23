@@ -46,6 +46,7 @@ import type {
   EmailConnectionTestResult,
   EmailMessage,
   EmailMessageListFilters,
+  EmailSyncRunResult,
   EmailSyncState,
   MessagingConnectionStatus,
   ScheduledTask,
@@ -88,6 +89,7 @@ interface EmailAPI {
   setMessageArchived(messageId: string, archived: boolean): Promise<void>;
   listAttachments(messageId: string): Promise<EmailAttachment[]>;
   getSyncState(accountId: string): Promise<EmailSyncState | null>;
+  runSync(accountId: string): Promise<EmailSyncRunResult>;
 }
 
 // Define the API interface

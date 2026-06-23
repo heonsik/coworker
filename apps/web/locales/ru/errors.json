@@ -102,11 +102,11 @@
     "tryAgain": "Пожалуйста, попробуйте снова"
   },
   "app": {
-    "mustRunInDesktop": "Это приложение необходимо запускать в десктопном приложении Accomplish.",
+    "mustRunInDesktop": "Это приложение необходимо запускать в десктопном приложении MOA.",
     "unableToStart": "Не удалось запустить",
     "updateRequired": "Требуется обновление",
-    "schemaNewerMessage": "Эти данные созданы более новой версией Accomplish (схема v{{version}}).",
-    "schemaNewerDetail": "Ваше приложение поддерживает схему до v{{version}}. Пожалуйста, обновите Accomplish."
+    "schemaNewerMessage": "Эти данные созданы более новой версией MOA (схема v{{version}}).",
+    "schemaNewerDetail": "Ваше приложение поддерживает схему до v{{version}}. Пожалуйста, обновите MOA."
   },
   "auth": {
     "sessionExpired": "Сессия {{provider}} истекла",

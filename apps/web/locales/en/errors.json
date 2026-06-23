@@ -102,11 +102,11 @@
     "tryAgain": "Please try again"
   },
   "app": {
-    "mustRunInDesktop": "This application must be run inside the Accomplish desktop app.",
+    "mustRunInDesktop": "This application must be run inside the MOA desktop app.",
     "unableToStart": "Unable to Start",
     "updateRequired": "Update Required",
-    "schemaNewerMessage": "This data was created by a newer version of Accomplish (schema v{{version}}).",
-    "schemaNewerDetail": "Your app supports up to schema v{{version}}. Please update Accomplish to continue."
+    "schemaNewerMessage": "This data was created by a newer version of MOA (schema v{{version}}).",
+    "schemaNewerDetail": "Your app supports up to schema v{{version}}. Please update MOA to continue."
   },
   "auth": {
     "sessionExpired": "{{provider}} Session Expired",

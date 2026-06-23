@@ -85,4 +85,8 @@ export function registerEmailHandlers(): void {
   handle('email:sync:get-state', async (_event: IpcMainInvokeEvent, accountId: string) => {
     return getDaemonClient().call('email.sync.getState', { accountId });
   });
+
+  handle('email:sync:run', async (_event: IpcMainInvokeEvent, accountId: string) => {
+    return getDaemonClient().call('email.sync.run', { accountId });
+  });
 }

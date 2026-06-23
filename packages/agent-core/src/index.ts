@@ -549,6 +549,7 @@ export type {
   EmailMessageCreateInput,
   EmailMessageListFilters,
   EmailReadState,
+  EmailSyncRunResult,
   EmailSyncState,
   EmailSyncStateUpdateInput,
 } from './common/types/email.js';

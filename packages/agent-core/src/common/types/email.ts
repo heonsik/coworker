@@ -158,6 +158,13 @@ export interface EmailSyncState {
   cursor: Record<string, unknown>;
 }
 
+export interface EmailSyncRunResult {
+  ok: boolean;
+  newCount: number;
+  totalOnServer: number;
+  error?: string;
+}
+
 export interface EmailSyncStateUpdateInput {
   accountId: string;
   lastSyncAt?: string;

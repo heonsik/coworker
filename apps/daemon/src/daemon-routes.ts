@@ -1200,6 +1200,13 @@ export function registerRpcMethods(services: RouteServices): void {
       return Promise.resolve(emailService.getSyncState(v.accountId));
     }),
   );
+  rpc.registerMethod(
+    'email.sync.run',
+    safeHandler((params) => {
+      const v = validate(z.object({ accountId: z.string().min(1) }), params);
+      return emailService.runSync(v.accountId);
+    }),
+  );
 
   rpc.registerMethod(
     'legacy.importElectronStoreIfNeeded',

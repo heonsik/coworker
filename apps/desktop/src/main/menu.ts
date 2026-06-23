@@ -97,13 +97,13 @@ export function buildAppMenu(): void {
           ? [
               { type: 'separator' as const },
               {
-                label: 'About Accomplish',
+                label: 'About MOA',
                 click: async () => {
                   await dialog.showMessageBox({
                     type: 'info',
-                    title: 'About Accomplish',
-                    message: 'Accomplish',
-                    detail: `Version ${app.getVersion()}\n\nA desktop automation assistant.\n\n© ${new Date().getFullYear()} Accomplish AI`,
+                    title: 'About MOA',
+                    message: 'MOA (Manufacturing Office by AI Portal)',
+                    detail: `Version ${app.getVersion()}\n\nA desktop automation assistant.\n\n© ${new Date().getFullYear()} MOA`,
                     buttons: ['OK'],
                   });
                 },

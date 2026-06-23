@@ -102,11 +102,11 @@
     "tryAgain": "请重试"
   },
   "app": {
-    "mustRunInDesktop": "此应用程序必须在 Accomplish 桌面应用内运行。",
+    "mustRunInDesktop": "此应用程序必须在 MOA 桌面应用内运行。",
     "unableToStart": "无法启动",
     "updateRequired": "需要更新",
-    "schemaNewerMessage": "此数据由更新版本的 Accomplish 创建（数据库版本 v{{version}}）。",
-    "schemaNewerDetail": "您的应用最高支持数据库版本 v{{version}}。请更新 Accomplish 以继续使用。"
+    "schemaNewerMessage": "此数据由更新版本的 MOA 创建（数据库版本 v{{version}}）。",
+    "schemaNewerDetail": "您的应用最高支持数据库版本 v{{version}}。请更新 MOA 以继续使用。"
   },
   "auth": {
     "sessionExpired": "{{provider}} 会话已过期",

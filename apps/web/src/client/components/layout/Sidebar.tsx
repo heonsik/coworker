@@ -12,7 +12,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import ConversationListItem from './ConversationListItem';
 import SettingsDialog from './SettingsDialog';
 import WorkspaceSelector from './WorkspaceSelector';
-import { Gear, ChatText, MagnifyingGlass } from '@phosphor-icons/react';
+import { Gear, ChatText, MagnifyingGlass, EnvelopeSimple } from '@phosphor-icons/react';
 import { DaemonStatusDot } from '@/components/DaemonStatusDot';
 import logoImage from '/assets/logo-1.png';
 
@@ -92,6 +92,15 @@ export default function Sidebar() {
             title={t('searchTasks')}
           >
             <MagnifyingGlass className="h-4 w-4" />
+          </Button>
+          <Button
+            onClick={() => navigate('/email')}
+            variant="outline"
+            size="sm"
+            className="px-2"
+            title={t('email')}
+          >
+            <EnvelopeSimple className="h-4 w-4" />
           </Button>
         </div>
 

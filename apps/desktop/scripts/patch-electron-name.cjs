@@ -1,12 +1,14 @@
 /**
  * Patches the Electron.app Info.plist for development:
- * - Shows "Accomplish" instead of "Electron" in macOS Cmd+Tab and Dock
+ * - Shows "MOA" instead of "Electron" in macOS Cmd+Tab and Dock
  * - Registers the "accomplish://" URL scheme so OAuth callbacks route to the running dev instance
  */
 const fs = require('fs');
 const path = require('path');
 
-const APP_NAME = 'Accomplish';
+const APP_NAME = 'MOA';
+// URL scheme stays "accomplish" — OAuth provider redirect URIs are registered
+// against accomplish://, so renaming it would break sign-in callbacks.
 const URL_SCHEME = 'accomplish';
 
 // Only run on macOS

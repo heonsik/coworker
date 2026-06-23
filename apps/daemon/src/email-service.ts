@@ -8,16 +8,22 @@ import type {
   EmailConnectionTestResult,
   EmailMessage,
   EmailMessageListFilters,
+  EmailSyncRunResult,
   EmailSyncState,
   StorageAPI,
 } from '@accomplish_ai/agent-core';
 import { testPop3Connection } from './pop3-client.js';
+import { EmailSyncService } from './email-sync-service.js';
 
 const emailPasswordKey = (accountId: string): string => `email:pop3-password:${accountId}`;
 const createEmailAccountId = (): string => `email_account_${randomUUID()}`;
 
 export class EmailService {
-  constructor(private readonly storage: StorageAPI) {}
+  private readonly syncService: EmailSyncService;
+
+  constructor(private readonly storage: StorageAPI) {
+    this.syncService = new EmailSyncService(storage);
+  }
 
   listAccounts(): EmailAccount[] {
     return this.storage.listEmailAccounts();
@@ -121,5 +127,9 @@ export class EmailService {
 
   getSyncState(accountId: string): EmailSyncState | null {
     return this.storage.getEmailSyncState(accountId);
+  }
+
+  async runSync(accountId: string): Promise<EmailSyncRunResult> {
+    return await this.syncService.syncAccount(accountId);
   }
 }

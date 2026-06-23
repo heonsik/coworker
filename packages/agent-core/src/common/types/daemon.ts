@@ -61,6 +61,7 @@ import type {
   EmailConnectionTestResult,
   EmailMessage,
   EmailMessageListFilters,
+  EmailSyncRunResult,
   EmailSyncState,
 } from './email.js';
 
@@ -730,6 +731,7 @@ export interface DaemonMethodMap {
   };
   'email.attachments.list': { params: { messageId: string }; result: EmailAttachment[] };
   'email.sync.getState': { params: { accountId: string }; result: EmailSyncState | null };
+  'email.sync.run': { params: { accountId: string }; result: EmailSyncRunResult };
 
   // Legacy electron-store import (one-shot, guarded by schema_meta flag)
   'legacy.importElectronStoreIfNeeded': {

@@ -114,8 +114,8 @@
     "npmRebuild": false,
     "compression": "normal",
     "appId": "ai.accomplish.desktop",
-    "productName": "Accomplish",
-    "artifactName": "Accomplish-${version}-${os}-${arch}.${ext}",
+    "productName": "MOA",
+    "artifactName": "MOA-${version}-${os}-${arch}.${ext}",
     "directories": {
       "output": "release",
       "buildResources": "resources"
@@ -273,7 +273,7 @@
       "allowToChangeInstallationDirectory": false,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "Accomplish",
+      "shortcutName": "MOA",
       "runAfterFinish": true,
       "installerIcon": "resources/icon.ico",
       "uninstallerIcon": "resources/icon.ico",

@@ -50,7 +50,7 @@ export function createMainWindow(opts: {
     height: 800,
     minWidth: 900,
     minHeight: 600,
-    title: 'Accomplish',
+    title: 'MOA (Manufacturing Office by AI Portal)',
     icon: icon.isEmpty() ? undefined : icon,
     backgroundColor: nativeTheme.shouldUseDarkColors ? '#171717' : '#f9f9f9',
     titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'default',

@@ -1,6 +1,6 @@
 {
   "title": "Настройки",
-  "setupTitle": "Настройка Accomplish",
+  "setupTitle": "Настройка MOA",
   "model": {
     "title": "Модель",
     "cloudProviders": "Облачные провайдеры",
@@ -60,9 +60,9 @@
     "fireworks": "Fireworks AI",
     "groq": "Groq",
     "huggingface-local": "HuggingFace Local",
-    "accomplish-ai": "Accomplish AI",
+    "accomplish-ai": "MOA AI",
     "accomplishAi": {
-      "description": "Используйте встроенную модель на базе Accomplish — API-ключ не требуется.\nВключает 200 бесплатных кредитов в месяц.",
+      "description": "Используйте встроенную модель на базе MOA — API-ключ не требуется.\nВключает 200 бесплатных кредитов в месяц.",
       "disconnect": "Отключить",
       "exhaustedMessage": "Кредиты исчерпаны. Они будут сброшены {{date}}.",
       "exhaustedMessageSoon": "Кредиты исчерпаны. Они будут сброшены в ближайшее время."
@@ -332,7 +332,7 @@
   },
   "integrations": {
     "title": "Интеграции мессенджеров",
-    "description": "Подключайте мессенджеры для удалённого запуска задач Accomplish. После подключения вы сможете запускать и отслеживать задачи с телефона или любого устройства.",
+    "description": "Подключайте мессенджеры для удалённого запуска задач MOA. После подключения вы сможете запускать и отслеживать задачи с телефона или любого устройства.",
     "enabled": "Включено",
     "messaging": "Мессенджеры",
     "comingSoon": "Скоро",
@@ -345,14 +345,14 @@
     "platforms": {
       "whatsapp": "Запускать задачи и получать обновления через WhatsApp",
       "slack": "Подключить рабочее пространство Slack для управления задачами",
-      "telegram": "Использовать Telegram-бота для взаимодействия с Accomplish",
+      "telegram": "Использовать Telegram-бота для взаимодействия с MOA",
       "teams": "Интегрировать с каналами и чатами Teams"
     },
     "whatsapp": {
       "connect": "Подключить WhatsApp",
       "scanQr": "Отсканируйте QR-код ниже в приложении WhatsApp для подключения этого устройства. Перейдите в WhatsApp > Настройки > Связанные устройства > Привязать устройство.",
       "qrPlaceholder": "QR-код появится здесь после запуска сервиса WhatsApp",
-      "securityNotice": "Подключая WhatsApp, вы предоставляете Accomplish доступ к своим сообщениям. Все данные остаются на вашем устройстве и не передаются третьим лицам."
+      "securityNotice": "Подключая WhatsApp, вы предоставляете MOA доступ к своим сообщениям. Все данные остаются на вашем устройстве и не передаются третьим лицам."
     },
     "tabs": {
       "messaging": "Сообщения",
@@ -414,17 +414,41 @@
       "success": "POP3 connection succeeded. UIDL reported {{count}} message(s).",
       "successNoUidl": "POP3 login succeeded, but this server does not support UIDL.",
       "failed": "POP3 connection failed."
+    },
+    "inbox": {
+      "title": "Входящие",
+      "allAccounts": "Все аккаунты",
+      "sync": "Синхронизировать",
+      "syncing": "Синхронизация...",
+      "syncDone": "Синхронизировано. Новых писем: {{count}}.",
+      "syncPartial": "Синхронизировано новых писем: {{count}}, ошибок аккаунтов: {{failed}}.",
+      "syncFailed": "Ошибка синхронизации.",
+      "noEnabledAccounts": "Нет включённых аккаунтов для синхронизации.",
+      "searchPlaceholder": "Поиск писем...",
+      "loading": "Загрузка писем...",
+      "loadFailed": "Не удалось загрузить письма.",
+      "empty": "Нет писем.",
+      "noSelection": "Выберите письмо для чтения.",
+      "noBody": "В этом письме нет текстового содержимого.",
+      "to": "Кому",
+      "star": "В избранное",
+      "archive": "Архивировать",
+      "filters": {
+        "all": "Все",
+        "unread": "Непрочитанные",
+        "starred": "Избранные"
+      }
     }
   },
   "appearance": {
     "title": "Тема",
-    "description": "Выберите внешний вид Accomplish. Выберите «Система» для соответствия настройкам ОС.",
+    "description": "Выберите внешний вид MOA. Выберите «Система» для соответствия настройкам ОС.",
     "ariaLabel": "Настройка темы",
     "system": "Система",
     "light": "Светлая",
     "dark": "Тёмная",
     "themeTitle": "Тема",
-    "themeDescription": "Выберите внешний вид Accomplish. Выберите «Система» для соответствия настройкам ОС.",
+    "themeDescription": "Выберите внешний вид MOA. Выберите «Система» для соответствия настройкам ОС.",
     "themeSystem": "Системная",
     "themeLight": "Светлая",
     "themeDark": "Тёмная"
@@ -462,7 +486,7 @@
       "connecting": "Connecting...",
       "disconnect": "Disconnect",
       "disconnecting": "Disconnecting...",
-      "authHint": "Accomplish will open your browser to authorize access.",
+      "authHint": "MOA will open your browser to authorize access.",
       "pendingHint": "Authorization was started but not finished. Reconnect to try again.",
       "connectedHint": "Connected and ready for the agent to use.",
       "waitingForBrowser": "Ожидание браузера…"
@@ -477,7 +501,7 @@
       "restartAuth": "Перезапустить авторизацию",
       "disconnect": "Отключить Slack",
       "disconnecting": "Отключение...",
-      "authHint": "Accomplish откроет браузер для подтверждения доступа к Slack.",
+      "authHint": "MOA откроет браузер для подтверждения доступа к Slack.",
       "pendingHint": "Авторизация Slack была начата, но не завершена. Перезапустите её.",
       "connectedHint": "Slack подключён и готов к использованию агентом.",
       "authFailed": "Не удалось подключить Slack",
@@ -503,7 +527,7 @@
     "monday": {
       "title": "monday.com",
       "description": "Let the agent manage boards, items, and updates in your monday.com workspace.",
-      "marketplaceHint": "Install the Accomplish app from the monday.com marketplace first.",
+      "marketplaceHint": "Install the MOA app from the monday.com marketplace first.",
       "marketplaceLink": "Open marketplace"
     },
     "lightdash": {
@@ -577,7 +601,7 @@
     "filterAll": "Все",
     "filterActive": "Активные",
     "filterInactive": "Неактивные",
-    "byAccomplish": "От Accomplish",
+    "byAccomplish": "От MOA",
     "github": "GitHub",
     "builtByYou": "Созданные вами",
     "loading": "Загрузка навыков...",
@@ -592,7 +616,7 @@
     "showInFolder": "Показать в папке",
     "delete": "Удалить",
     "add": "Добавить",
-    "buildWithAccomplish": "Создать с Accomplish",
+    "buildWithAccomplish": "Создать с MOA",
     "buildDescription": "Создавайте навыки через диалог",
     "uploadSkill": "Загрузить навык",
     "uploadDescription": "Выберите папку с навыком для импорта",
@@ -622,7 +646,7 @@
     "exported": "Экспортировано",
     "exportFailed": "Ошибка экспорта",
     "exportDialogTitle": "Экспорт логов приложения",
-    "exportHeader": "Логи приложения Accomplish\nЭкспортировано: {{timestamp}}\nКаталог логов: {{logDir}}\n\nЗаписи пока отсутствуют.\n"
+    "exportHeader": "Логи приложения MOA\nЭкспортировано: {{timestamp}}\nКаталог логов: {{logDir}}\n\nЗаписи пока отсутствуют.\n"
   },
   "language": {
     "title": "Язык",
@@ -637,13 +661,13 @@
   "about": {
     "title": "О программе",
     "version": "Версия {{version}}",
-    "description": "Accomplish — это локальный ИИ-агент для вашего Mac, который читает файлы, создаёт документы и автоматизирует рутинную работу — всё с открытым исходным кодом и вашими моделями ИИ.",
+    "description": "MOA (Manufacturing Office by AI Portal) — это локальный ИИ-агент для вашего Mac, который читает файлы, создаёт документы и автоматизирует рутинную работу — всё с открытым исходным кодом и вашими моделями ИИ.",
     "contact": "Есть вопросы или предложения? Нажмите здесь, чтобы связаться с нами",
     "visitUs": "Наш сайт",
     "haveQuestion": "Есть вопрос?",
     "versionLabel": "Версия",
     "loading": "Загрузка...",
-    "allRightsReserved": "Accomplish™ Все права защищены."
+    "allRightsReserved": "MOA™ Все права защищены."
   },
   "warnings": {
     "noProviderReady": "Провайдер не готов",

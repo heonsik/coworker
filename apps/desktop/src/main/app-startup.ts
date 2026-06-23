@@ -89,10 +89,10 @@ async function bootstrapDaemonWithRetry(): Promise<'connected' | 'quit'> {
       for (;;) {
         const response = await dialog.showMessageBox({
           type: 'error',
-          title: 'Accomplish cannot start',
+          title: 'MOA cannot start',
           message: 'The background service failed to start.',
           detail:
-            'Accomplish stores your settings, conversations, and credentials in a background ' +
+            'MOA stores your settings, conversations, and credentials in a background ' +
             'process. Without it the app cannot load.\n\n' +
             `Error: ${err instanceof Error ? err.message : String(err)}`,
           buttons: ['Retry', 'Open Logs', 'Quit'],
