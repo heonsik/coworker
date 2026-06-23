@@ -36,6 +36,9 @@ export function validateTaskConfig(config: TaskConfig): TaskConfig {
   if (config.modelId) {
     validated.modelId = sanitizeString(config.modelId, 'modelId', 128);
   }
+  if (config.provider) {
+    validated.provider = sanitizeString(config.provider, 'provider', 128);
+  }
   // Copy workspaceId through so `resolveTaskConfig` can inject the
   // workspace's knowledge notes into the system prompt. Without this
   // copy, `task-service.startTask` writes `config.workspaceId` but

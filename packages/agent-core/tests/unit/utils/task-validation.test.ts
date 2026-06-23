@@ -33,6 +33,17 @@ describe('validateTaskConfig', () => {
     expect(validated.modelId).toBe('claude-sonnet');
   });
 
+  it('preserves provider on the validated config', () => {
+    const config: TaskConfig = {
+      prompt: 'Do something',
+      modelId: 'openrouter/z-ai/glm-5.2',
+      provider: 'openrouter',
+    };
+
+    const validated = validateTaskConfig(config);
+    expect(validated.provider).toBe('openrouter');
+  });
+
   it('omits files when none are provided', () => {
     const config: TaskConfig = { prompt: 'No files here' };
     const validated = validateTaskConfig(config);

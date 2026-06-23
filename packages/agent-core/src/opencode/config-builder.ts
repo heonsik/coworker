@@ -74,6 +74,31 @@ export interface BuildProviderConfigsOptions {
   accomplishStorageDeps?: StorageDeps;
 }
 
+function getActiveModelFromSettings(providerSettings: ProviderSettings): {
+  provider: string;
+  model: string;
+  baseUrl?: string;
+} | null {
+  const activeId = providerSettings.activeProviderId;
+  if (!activeId) {
+    return null;
+  }
+  const provider = providerSettings.connectedProviders[activeId];
+  if (!provider?.selectedModelId) {
+    return null;
+  }
+  const result: { provider: string; model: string; baseUrl?: string } = {
+    provider: activeId,
+    model: provider.selectedModelId,
+  };
+  if (provider.credentials.type === 'ollama') {
+    result.baseUrl = provider.credentials.serverUrl;
+  } else if (provider.credentials.type === 'litellm') {
+    result.baseUrl = provider.credentials.serverUrl;
+  }
+  return result;
+}
+
 /**
  * Builds provider configurations for OpenCode CLI by delegating to per-provider builders.
  * Each builder returns configs + extra enabled IDs + optional model override.
@@ -83,8 +108,16 @@ export async function buildProviderConfigs(
 ): Promise<ProviderConfigResult> {
   const { getApiKey, azureFoundryToken, accomplishRuntime, accomplishStorageDeps } = options;
   const providerSettings = options.providerSettings ?? getProviderSettings();
-  const connectedIds = getConnectedProviderIds();
-  const activeModel = getActiveProviderModel();
+  const connectedIds =
+    options.providerSettings !== undefined
+      ? (Object.values(providerSettings.connectedProviders)
+          .filter((provider) => provider?.connectionStatus === 'connected')
+          .map((provider) => provider.providerId) as Array<keyof typeof PROVIDER_ID_TO_OPENCODE>)
+      : getConnectedProviderIds();
+  const activeModel =
+    options.providerSettings !== undefined
+      ? getActiveModelFromSettings(providerSettings)
+      : getActiveProviderModel();
   const ctx = {
     providerSettings,
     getApiKey,

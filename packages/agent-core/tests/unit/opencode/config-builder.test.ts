@@ -124,4 +124,39 @@ describe('buildProviderConfigs', () => {
       expect(googleConfig).toBeUndefined();
     });
   });
+
+  describe('OpenRouter provider', () => {
+    it('uses OpenRouter model tool metadata and sets a model override', async () => {
+      const result = await buildProviderConfigs({
+        getApiKey: (p) => (p === 'openrouter' ? 'sk-or-test' : undefined),
+        providerSettings: {
+          activeProviderId: 'openrouter',
+          connectedProviders: {
+            openrouter: {
+              providerId: 'openrouter',
+              connectionStatus: 'connected',
+              selectedModelId: 'openrouter/google/gemini-3-pro-image-preview',
+              credentials: { type: 'openrouter', keyPrefix: 'sk-or...' },
+              availableModels: [
+                {
+                  id: 'openrouter/google/gemini-3-pro-image-preview',
+                  name: 'Gemini 3 Pro Image Preview',
+                  toolSupport: 'unsupported',
+                },
+              ],
+              lastConnectedAt: new Date().toISOString(),
+            },
+          },
+          debugMode: false,
+        } as never,
+      });
+
+      const openRouterConfig = result.providerConfigs.find((p) => p.id === 'openrouter');
+      expect(openRouterConfig?.models?.['google/gemini-3-pro-image-preview']?.tools).toBe(false);
+      expect(result.modelOverride).toEqual({
+        model: 'openrouter/google/gemini-3-pro-image-preview',
+        smallModel: 'openrouter/google/gemini-3-pro-image-preview',
+      });
+    });
+  });
 });

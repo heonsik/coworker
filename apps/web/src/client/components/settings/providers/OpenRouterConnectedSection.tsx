@@ -1,13 +1,14 @@
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import type { ConnectedProvider, OpenRouterCredentials } from '@accomplish_ai/agent-core/common';
+import type { ToolSupportStatus } from '@accomplish_ai/agent-core';
 import { PROVIDER_META } from '@accomplish_ai/agent-core/common';
 import { ModelSelector, ConnectedControls } from '../shared';
 import { settingsVariants, settingsTransitions } from '@/lib/animations';
 
 interface OpenRouterConnectedSectionProps {
   connectedProvider: ConnectedProvider;
-  models: Array<{ id: string; name: string }>;
+  models: Array<{ id: string; name: string; toolSupport?: ToolSupportStatus }>;
   onDisconnect: () => void;
   onModelChange: (modelId: string) => void;
   showModelError: boolean;

@@ -158,6 +158,7 @@ export class TaskService extends EventEmitter {
     prompt: string;
     taskId?: string;
     modelId?: string;
+    provider?: string;
     sessionId?: string;
     workingDirectory?: string;
     workspaceId?: string;
@@ -198,6 +199,7 @@ export class TaskService extends EventEmitter {
       prompt: params.prompt,
       taskId,
       modelId: params.modelId,
+      provider: params.provider,
       sessionId: params.sessionId,
       workingDirectory: params.workingDirectory,
       workspaceId: params.workspaceId,
@@ -215,6 +217,9 @@ export class TaskService extends EventEmitter {
     const selectedModel = activeModel || this.storage.getSelectedModel();
     if (selectedModel?.model && !validatedConfig.modelId) {
       validatedConfig.modelId = selectedModel.model;
+    }
+    if (selectedModel?.provider && !validatedConfig.provider) {
+      validatedConfig.provider = selectedModel.provider;
     }
 
     const task = await this._runTask(taskId, validatedConfig);
@@ -312,6 +317,7 @@ export class TaskService extends EventEmitter {
       sessionId,
       taskId,
       modelId: selectedModel?.model,
+      provider: selectedModel?.provider,
       files: attachments,
       workspaceId,
     });

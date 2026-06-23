@@ -1,5 +1,6 @@
 import { fetchWithTimeout } from '../utils/fetch.js';
 import { createConsoleLogger } from '../utils/logging.js';
+import type { ToolSupportStatus } from '../common/types/providerSettings.js';
 
 const log = createConsoleLogger({ prefix: 'OpenRouter' });
 
@@ -10,6 +11,7 @@ export interface OpenRouterModel {
   name: string;
   provider: string;
   contextLength: number;
+  toolSupport: ToolSupportStatus;
 }
 
 export interface FetchModelsResult {
@@ -54,15 +56,27 @@ export async function fetchOpenRouterModels(
     }
 
     const data = (await response.json()) as {
-      data?: Array<{ id: string; name: string; context_length?: number }>;
+      data?: Array<{
+        id: string;
+        name: string;
+        context_length?: number;
+        supported_parameters?: string[];
+      }>;
     };
     const models = (data.data || []).map((m) => {
       const provider = m.id.split('/')[0] || 'unknown';
+      const supportedParameters = Array.isArray(m.supported_parameters)
+        ? m.supported_parameters
+        : [];
+      const toolSupport: ToolSupportStatus = supportedParameters.includes('tools')
+        ? 'supported'
+        : 'unsupported';
       return {
         id: m.id,
         name: m.name || m.id,
         provider,
         contextLength: m.context_length || 0,
+        toolSupport,
       };
     });
 

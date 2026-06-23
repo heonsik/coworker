@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { AnimatePresence, motion } from 'framer-motion';
 import { getAccomplish } from '@/lib/accomplish';
 import type { ConnectedProvider, OpenRouterCredentials } from '@accomplish_ai/agent-core/common';
+import type { ToolSupportStatus } from '@accomplish_ai/agent-core';
 import { PROVIDER_META } from '@accomplish_ai/agent-core/common';
 import { ConnectButton, ProviderFormHeader, FormError } from '../shared';
 import { settingsVariants, settingsTransitions } from '@/lib/animations';
@@ -30,7 +31,9 @@ export function OpenRouterProviderForm({
   const [apiKey, setApiKey] = useState('');
   const [connecting, setConnecting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [availableModels, setAvailableModels] = useState<Array<{ id: string; name: string }>>([]);
+  const [availableModels, setAvailableModels] = useState<
+    Array<{ id: string; name: string; toolSupport?: ToolSupportStatus }>
+  >([]);
 
   const meta = PROVIDER_META.openrouter;
   const isConnected = connectedProvider?.connectionStatus === 'connected';
@@ -70,6 +73,7 @@ export function OpenRouterProviderForm({
         result.models?.map((m) => ({
           id: `openrouter/${m.id}`,
           name: m.name,
+          toolSupport: m.toolSupport,
         })) || [];
       setAvailableModels(models);
 

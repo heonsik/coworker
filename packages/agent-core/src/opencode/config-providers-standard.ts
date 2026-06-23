@@ -4,8 +4,23 @@ import { ensureMoonshotProxy } from './proxies/index.js';
 import { MINIMAX_DEFAULT_BASE_URL } from '../common/index.js';
 import { createConsoleLogger } from '../utils/logging.js';
 import type { ProviderBuildContext, ProviderBuildResult } from './config-provider-context.js';
+import type { ConnectedProvider } from '../common/types/providerSettings.js';
 
 const log = createConsoleLogger({ prefix: 'OpenCodeConfigBuilder' });
+
+function getOpenRouterModelId(model: string): string {
+  return model.replace(/^openrouter\//, '');
+}
+
+function getOpenRouterToolSupport(
+  provider: ConnectedProvider | undefined,
+  selectedModelId: string,
+): boolean {
+  const selectedModel = provider?.availableModels?.find(
+    (model) => model.id === selectedModelId || model.id === getOpenRouterModelId(selectedModelId),
+  );
+  return selectedModel?.toolSupport !== 'unsupported';
+}
 
 export async function buildOpenRouterConfig(
   ctx: ProviderBuildContext,
@@ -16,8 +31,11 @@ export async function buildOpenRouterConfig(
     openrouterProvider?.connectionStatus === 'connected' &&
     activeModel?.provider === 'openrouter'
   ) {
-    const modelId = activeModel.model.replace('openrouter/', '');
-    log.info(`[OpenCode Config Builder] OpenRouter configured: ${modelId}`);
+    const modelId = getOpenRouterModelId(activeModel.model);
+    const supportsTools = getOpenRouterToolSupport(openrouterProvider, activeModel.model);
+    log.info(
+      `[OpenCode Config Builder] OpenRouter configured: ${modelId} (tools: ${supportsTools})`,
+    );
     return {
       configs: [
         {
@@ -25,10 +43,14 @@ export async function buildOpenRouterConfig(
           npm: '@ai-sdk/openai-compatible',
           name: 'OpenRouter',
           options: { baseURL: 'https://openrouter.ai/api/v1' },
-          models: { [modelId]: { name: modelId, tools: true } },
+          models: { [modelId]: { name: modelId, tools: supportsTools } },
         },
       ],
       enableToAdd: [],
+      modelOverride: {
+        model: `openrouter/${modelId}`,
+        smallModel: `openrouter/${modelId}`,
+      },
     };
   }
 
@@ -37,7 +59,7 @@ export async function buildOpenRouterConfig(
   if (openrouterKey) {
     const selectedModel = getSelectedModel();
     if (selectedModel?.provider === 'openrouter' && selectedModel.model) {
-      const modelId = selectedModel.model.replace('openrouter/', '');
+      const modelId = getOpenRouterModelId(selectedModel.model);
       log.info(`[OpenCode Config Builder] OpenRouter (legacy) configured: ${modelId}`);
       return {
         configs: [
@@ -50,6 +72,10 @@ export async function buildOpenRouterConfig(
           },
         ],
         enableToAdd: [],
+        modelOverride: {
+          model: `openrouter/${modelId}`,
+          smallModel: `openrouter/${modelId}`,
+        },
       };
     }
   }

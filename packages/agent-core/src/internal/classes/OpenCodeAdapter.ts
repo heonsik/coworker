@@ -77,6 +77,8 @@ import { getOAuthProviderDisplayName, isOAuthProviderId } from '../../common/typ
 import { CONNECTOR_AUTH_REQUIRED_MARKER } from '../../common/constants.js';
 import { createConsoleLogger } from '../../utils/logging.js';
 import { ACCOMPLISH_AGENT_NAME } from '../../opencode/config-generator.js';
+import { normalizeSelectedModelForSdk } from '../../opencode/model-runtime-mapping.js';
+import type { ProviderType } from '../../common/types/provider.js';
 // `toTaskMessage` and `ModelContext` will be wired when we move to emitting
 // pre-processed `TaskMessage` shapes on the event bus (Phase 1c / Phase 2 —
 // renderer upsert-by-ID lands there). Today we still emit `OpenCodeMessage`
@@ -742,8 +744,13 @@ export class OpenCodeAdapter extends EventEmitter<OpenCodeAdapterEvents> {
   }
 
   private buildModelParam(config: TaskConfig): { providerID: string; modelID: string } | null {
-    if (!config.modelId || !config.provider) return null;
-    return { providerID: config.provider, modelID: config.modelId };
+    if (!config.modelId) return null;
+    const provider = config.provider ?? config.modelId.split('/')[0];
+    if (!provider) return null;
+    return normalizeSelectedModelForSdk({
+      provider: provider as ProviderType,
+      model: config.modelId,
+    });
   }
 
   private createCompletionEnforcer(): CompletionEnforcer {

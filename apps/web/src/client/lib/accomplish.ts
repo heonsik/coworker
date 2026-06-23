@@ -294,7 +294,13 @@ interface AccomplishAPI {
   // OpenRouter configuration
   fetchOpenRouterModels(): Promise<{
     success: boolean;
-    models?: Array<{ id: string; name: string; provider: string; contextLength: number }>;
+    models?: Array<{
+      id: string;
+      name: string;
+      provider: string;
+      contextLength: number;
+      toolSupport: ToolSupportStatus;
+    }>;
     error?: string;
   }>;
 
