@@ -50,6 +50,7 @@ export type {
   ProviderSettingsAPI,
   SecureStorageAPI,
   DatabaseLifecycleAPI,
+  EmailStorageAPI,
   // Permission Handler API
   PermissionHandlerAPI,
   PermissionHandlerOptions,
@@ -224,6 +225,26 @@ export {
 } from './storage/repositories/knowledgeNotes.js';
 
 export { getEnabledSkills } from './storage/repositories/skills.js';
+
+// Email repository
+export {
+  createEmailAccount,
+  listEmailAccounts,
+  getEmailAccount,
+  updateEmailAccount,
+  deleteEmailAccount,
+  upsertEmailMessage,
+  listEmailMessages,
+  getEmailMessage,
+  getEmailMessageByUidl,
+  markEmailMessageRead,
+  setEmailMessageStarred,
+  setEmailMessageArchived,
+  createEmailAttachment,
+  listEmailAttachments,
+  getEmailSyncState,
+  upsertEmailSyncState,
+} from './storage/repositories/email.js';
 
 // -----------------------------------------------------------------------------
 // Providers Module (from ./providers/)
@@ -513,6 +534,24 @@ export {
 // Other types
 export type { TodoItem } from './common/types/todo.js';
 export type { LogLevel, LogSource, LogEntry } from './common/types/logging.js';
+export type {
+  EmailAccount,
+  EmailAccountCreateInput,
+  EmailAccountSettingsUpdateInput,
+  EmailAccountUpdateInput,
+  EmailAccountWithPasswordInput,
+  EmailAddress,
+  EmailAttachment,
+  EmailAttachmentCreateInput,
+  EmailConnectionTestInput,
+  EmailConnectionTestResult,
+  EmailMessage,
+  EmailMessageCreateInput,
+  EmailMessageListFilters,
+  EmailReadState,
+  EmailSyncState,
+  EmailSyncStateUpdateInput,
+} from './common/types/email.js';
 
 // Sandbox types
 export type {

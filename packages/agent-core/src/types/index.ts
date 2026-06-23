@@ -30,6 +30,7 @@ export type {
   SecureStorageAPI,
   DatabaseLifecycleAPI,
   SchedulerStorageAPI,
+  EmailStorageAPI,
 } from './storage.js';
 
 // Permission Handler API

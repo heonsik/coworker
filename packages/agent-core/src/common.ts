@@ -200,6 +200,26 @@ export type { ScheduledTask } from './common/types/daemon.js';
 export type { TodoItem } from './common/types/todo.js';
 export type { LogLevel, LogSource, LogEntry } from './common/types/logging.js';
 
+// Email types
+export type {
+  EmailAccount,
+  EmailAccountCreateInput,
+  EmailAccountSettingsUpdateInput,
+  EmailAccountUpdateInput,
+  EmailAccountWithPasswordInput,
+  EmailAddress,
+  EmailAttachment,
+  EmailAttachmentCreateInput,
+  EmailConnectionTestInput,
+  EmailConnectionTestResult,
+  EmailMessage,
+  EmailMessageCreateInput,
+  EmailMessageListFilters,
+  EmailReadState,
+  EmailSyncState,
+  EmailSyncStateUpdateInput,
+} from './common/types/email.js';
+
 // === CONSTANTS ===
 export {
   DEV_BROWSER_PORT,

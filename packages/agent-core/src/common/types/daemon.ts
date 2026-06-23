@@ -52,6 +52,17 @@ import type {
 } from '../../types/storage.js';
 import type { GoogleAccount, GoogleAccountStatus, GoogleAccountToken } from './google-account.js';
 import type { Skill } from './skills.js';
+import type {
+  EmailAccount,
+  EmailAccountSettingsUpdateInput,
+  EmailAccountWithPasswordInput,
+  EmailAttachment,
+  EmailConnectionTestInput,
+  EmailConnectionTestResult,
+  EmailMessage,
+  EmailMessageListFilters,
+  EmailSyncState,
+} from './email.js';
 
 // =============================================================================
 // JSON-RPC 2.0 Base Types
@@ -692,6 +703,33 @@ export interface DaemonMethodMap {
 
   // Logs (bug-report support)
   'logs.getTasksForBugReport': { params: undefined; result: Task[] };
+
+  // Email (POP3 foundation)
+  'email.accounts.list': { params: undefined; result: EmailAccount[] };
+  'email.accounts.get': { params: { accountId: string }; result: EmailAccount | null };
+  'email.accounts.create': {
+    params: { input: EmailAccountWithPasswordInput };
+    result: EmailAccount;
+  };
+  'email.accounts.update': {
+    params: { accountId: string; input: EmailAccountSettingsUpdateInput };
+    result: EmailAccount | null;
+  };
+  'email.accounts.delete': { params: { accountId: string }; result: void };
+  'email.account.testConnection': {
+    params: { input: EmailConnectionTestInput };
+    result: EmailConnectionTestResult;
+  };
+  'email.messages.list': { params: EmailMessageListFilters | undefined; result: EmailMessage[] };
+  'email.messages.get': { params: { messageId: string }; result: EmailMessage | null };
+  'email.messages.markRead': { params: { messageId: string; read: boolean }; result: void };
+  'email.messages.setStarred': { params: { messageId: string; starred: boolean }; result: void };
+  'email.messages.setArchived': {
+    params: { messageId: string; archived: boolean };
+    result: void;
+  };
+  'email.attachments.list': { params: { messageId: string }; result: EmailAttachment[] };
+  'email.sync.getState': { params: { accountId: string }; result: EmailSyncState | null };
 
   // Legacy electron-store import (one-shot, guarded by schema_meta flag)
   'legacy.importElectronStoreIfNeeded': {

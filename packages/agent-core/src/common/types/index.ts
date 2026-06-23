@@ -113,6 +113,24 @@ export type {
 } from './task.js';
 
 export type { TodoItem } from './todo.js';
+export type {
+  EmailAccount,
+  EmailAccountCreateInput,
+  EmailAccountSettingsUpdateInput,
+  EmailAccountUpdateInput,
+  EmailAccountWithPasswordInput,
+  EmailAddress,
+  EmailAttachment,
+  EmailAttachmentCreateInput,
+  EmailConnectionTestInput,
+  EmailConnectionTestResult,
+  EmailMessage,
+  EmailMessageCreateInput,
+  EmailMessageListFilters,
+  EmailReadState,
+  EmailSyncState,
+  EmailSyncStateUpdateInput,
+} from './email.js';
 export * from './auth.js';
 export * from './logging.js';
 export * from './opencode.js';
@@ -122,6 +140,7 @@ export * from './providerSettings.js';
 export * from './skills.js';
 export * from './task.js';
 export * from './todo.js';
+export * from './email.js';
 export * from './workspace.js';
 
 export type {

@@ -13,6 +13,7 @@ import { GeneralTab } from '@/components/settings/GeneralTab';
 import { SandboxSection } from '@/components/settings/SandboxSection';
 import { IntegrationsPanel } from '@/components/settings/integrations';
 import { SchedulerPanel } from '@/components/settings/scheduler';
+import { EmailSettingsPanel } from '@/components/settings/email';
 
 import { CloudBrowsersPanel } from '@/components/settings/CloudBrowsersPanel';
 import { cn } from '@/lib/utils';
@@ -199,6 +200,11 @@ export function SettingsDialog({
               {s.activeTab === 'integrations' && (
                 <div className="space-y-6">
                   <IntegrationsPanel />
+                </div>
+              )}
+              {s.activeTab === 'email' && (
+                <div className="space-y-6">
+                  <EmailSettingsPanel />
                 </div>
               )}
               {s.activeTab === 'scheduler' && (

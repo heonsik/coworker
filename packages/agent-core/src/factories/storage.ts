@@ -99,6 +99,24 @@ import {
   setScheduledTaskEnabled,
   updateScheduledTaskLastRun,
 } from '../storage/repositories/scheduled-tasks.js';
+import {
+  createEmailAccount,
+  listEmailAccounts,
+  getEmailAccount,
+  updateEmailAccount,
+  deleteEmailAccount,
+  upsertEmailMessage,
+  listEmailMessages,
+  getEmailMessage,
+  getEmailMessageByUidl,
+  markEmailMessageRead,
+  setEmailMessageStarred,
+  setEmailMessageArchived,
+  createEmailAttachment,
+  listEmailAttachments,
+  getEmailSyncState,
+  upsertEmailSyncState,
+} from '../storage/repositories/email.js';
 import { SecureStorage } from '../internal/classes/SecureStorage.js';
 import type { OAuthTokens } from '../common/types/connector.js';
 import type { StorageAPI, StorageOptions } from '../types/storage.js';
@@ -235,9 +253,28 @@ export function createStorage(options: StorageOptions = {}): StorageAPI {
     updateScheduledTaskLastRun: (id, timestamp, nextRunAt) =>
       updateScheduledTaskLastRun(id, timestamp, nextRunAt),
 
+    // Email
+    createEmailAccount: (input) => createEmailAccount(input),
+    listEmailAccounts: () => listEmailAccounts(),
+    getEmailAccount: (id) => getEmailAccount(id),
+    updateEmailAccount: (id, input) => updateEmailAccount(id, input),
+    deleteEmailAccount: (id) => deleteEmailAccount(id),
+    upsertEmailMessage: (input) => upsertEmailMessage(input),
+    listEmailMessages: (filters) => listEmailMessages(filters),
+    getEmailMessage: (id) => getEmailMessage(id),
+    getEmailMessageByUidl: (accountId, uidl) => getEmailMessageByUidl(accountId, uidl),
+    markEmailMessageRead: (id, read) => markEmailMessageRead(id, read),
+    setEmailMessageStarred: (id, starred) => setEmailMessageStarred(id, starred),
+    setEmailMessageArchived: (id, archived) => setEmailMessageArchived(id, archived),
+    createEmailAttachment: (input) => createEmailAttachment(input),
+    listEmailAttachments: (messageId) => listEmailAttachments(messageId),
+    getEmailSyncState: (accountId) => getEmailSyncState(accountId),
+    upsertEmailSyncState: (input) => upsertEmailSyncState(input),
+
     // Secure Storage
     set: (key, value) => secureStorage.set(key, value),
     get: (key) => secureStorage.get(key),
+    delete: (key) => secureStorage.delete(key),
     storeApiKey: (provider, apiKey) => secureStorage.storeApiKey(provider, apiKey),
     getApiKey: (provider) => secureStorage.getApiKey(provider),
     deleteApiKey: (provider) => secureStorage.deleteApiKey(provider),

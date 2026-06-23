@@ -20,6 +20,22 @@ import type { SandboxConfig } from '../common/types/sandbox.js';
 import type { CloudBrowserConfig } from '../common/types/cloud-browser.js';
 import type { MessagingConfig } from '../common/types/messaging.js';
 import type { ScheduledTask } from '../common/types/daemon.js';
+import type {
+  EmailAccount,
+  EmailAccountCreateInput,
+  EmailAccountSettingsUpdateInput,
+  EmailAccountUpdateInput,
+  EmailAccountWithPasswordInput,
+  EmailAttachment,
+  EmailAttachmentCreateInput,
+  EmailConnectionTestInput,
+  EmailConnectionTestResult,
+  EmailMessage,
+  EmailMessageCreateInput,
+  EmailMessageListFilters,
+  EmailSyncState,
+  EmailSyncStateUpdateInput,
+} from '../common/types/email.js';
 
 /** Options for creating a Storage instance */
 export interface StorageOptions {
@@ -257,6 +273,8 @@ export interface SecureStorageAPI {
   set(key: string, value: string): void;
   /** Retrieve an arbitrary encrypted value by key */
   get(key: string): string | null;
+  /** Delete an arbitrary encrypted value by key */
+  delete(key: string): boolean;
   /** Store an API key for a provider */
   storeApiKey(provider: string, apiKey: string): void;
   /** Retrieve an API key for a provider */
@@ -335,7 +353,27 @@ export interface SchedulerStorageAPI {
   updateScheduledTaskLastRun(id: string, timestamp: string, nextRunAt: string): void;
 }
 
-/** Unified storage API combining task, settings, provider, secure storage, connector, scheduler, and database lifecycle operations */
+/** API for POP3 email account, message, attachment, and sync-state persistence */
+export interface EmailStorageAPI {
+  createEmailAccount(input: EmailAccountCreateInput): EmailAccount;
+  listEmailAccounts(): EmailAccount[];
+  getEmailAccount(id: string): EmailAccount | null;
+  updateEmailAccount(id: string, input: EmailAccountUpdateInput): EmailAccount | null;
+  deleteEmailAccount(id: string): void;
+  upsertEmailMessage(input: EmailMessageCreateInput): EmailMessage;
+  listEmailMessages(filters?: EmailMessageListFilters): EmailMessage[];
+  getEmailMessage(id: string): EmailMessage | null;
+  getEmailMessageByUidl(accountId: string, uidl: string): EmailMessage | null;
+  markEmailMessageRead(id: string, read: boolean): void;
+  setEmailMessageStarred(id: string, starred: boolean): void;
+  setEmailMessageArchived(id: string, archived: boolean): void;
+  createEmailAttachment(input: EmailAttachmentCreateInput): EmailAttachment;
+  listEmailAttachments(messageId: string): EmailAttachment[];
+  getEmailSyncState(accountId: string): EmailSyncState | null;
+  upsertEmailSyncState(input: EmailSyncStateUpdateInput): EmailSyncState;
+}
+
+/** Unified storage API combining task, settings, provider, secure storage, connector, scheduler, email, and database lifecycle operations */
 export interface StorageAPI
   extends
     TaskStorageAPI,
@@ -344,6 +382,7 @@ export interface StorageAPI
     SecureStorageAPI,
     ConnectorStorageAPI,
     SchedulerStorageAPI,
+    EmailStorageAPI,
     DatabaseLifecycleAPI {}
 
 export type {
@@ -364,4 +403,18 @@ export type {
   OAuthTokens,
   CloudBrowserConfig,
   MessagingConfig,
+  EmailAccount,
+  EmailAccountCreateInput,
+  EmailAccountSettingsUpdateInput,
+  EmailAccountUpdateInput,
+  EmailAccountWithPasswordInput,
+  EmailAttachment,
+  EmailAttachmentCreateInput,
+  EmailConnectionTestInput,
+  EmailConnectionTestResult,
+  EmailMessage,
+  EmailMessageCreateInput,
+  EmailMessageListFilters,
+  EmailSyncState,
+  EmailSyncStateUpdateInput,
 };

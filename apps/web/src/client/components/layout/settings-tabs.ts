@@ -8,6 +8,7 @@ import {
   ChatCircle,
   GearSix,
   Timer,
+  EnvelopeSimple,
 } from '@phosphor-icons/react';
 
 export type SettingsTabId =
@@ -17,6 +18,7 @@ export type SettingsTabId =
   | 'browsers'
   | 'workspaces'
   | 'integrations'
+  | 'email'
   | 'scheduler'
   | 'general'
   | 'about';
@@ -27,6 +29,7 @@ export const SETTINGS_TABS = [
   { id: 'browsers' as const, labelKey: 'tabs.browsers', icon: Globe },
   { id: 'workspaces' as const, labelKey: 'tabs.workspaces', icon: FolderSimple },
   { id: 'integrations' as const, labelKey: 'tabs.integrations', icon: ChatCircle },
+  { id: 'email' as const, labelKey: 'tabs.email', icon: EnvelopeSimple },
   { id: 'scheduler' as const, labelKey: 'tabs.scheduler', icon: Timer },
   { id: 'voice' as const, labelKey: 'tabs.voiceInput', icon: Microphone },
   { id: 'general' as const, labelKey: 'tabs.general', icon: GearSix },

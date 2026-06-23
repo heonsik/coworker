@@ -38,6 +38,15 @@ import type {
 } from '@accomplish_ai/agent-core';
 import type {
   CloudBrowserConfig,
+  EmailAccount,
+  EmailAccountSettingsUpdateInput,
+  EmailAccountWithPasswordInput,
+  EmailAttachment,
+  EmailConnectionTestInput,
+  EmailConnectionTestResult,
+  EmailMessage,
+  EmailMessageListFilters,
+  EmailSyncState,
   MessagingConnectionStatus,
   ScheduledTask,
   GoogleAccount,
@@ -60,6 +69,25 @@ interface GwsAPI {
    * don't fire on this channel. See M5 review finding P2.3.
    */
   onAuthError(callback: (payload: { message: string }) => void): () => void;
+}
+
+interface EmailAPI {
+  listAccounts(): Promise<EmailAccount[]>;
+  getAccount(accountId: string): Promise<EmailAccount | null>;
+  createAccount(input: EmailAccountWithPasswordInput): Promise<EmailAccount>;
+  updateAccount(
+    accountId: string,
+    input: EmailAccountSettingsUpdateInput,
+  ): Promise<EmailAccount | null>;
+  deleteAccount(accountId: string): Promise<void>;
+  testConnection(input: EmailConnectionTestInput): Promise<EmailConnectionTestResult>;
+  listMessages(filters?: EmailMessageListFilters): Promise<EmailMessage[]>;
+  getMessage(messageId: string): Promise<EmailMessage | null>;
+  markMessageRead(messageId: string, read: boolean): Promise<void>;
+  setMessageStarred(messageId: string, starred: boolean): Promise<void>;
+  setMessageArchived(messageId: string, archived: boolean): Promise<void>;
+  listAttachments(messageId: string): Promise<EmailAttachment[]>;
+  getSyncState(accountId: string): Promise<EmailSyncState | null>;
 }
 
 // Define the API interface
@@ -685,6 +713,9 @@ interface AccomplishAPI {
 
   // Google Workspace multi-account
   gws?: GwsAPI;
+
+  // POP3 email
+  email?: EmailAPI;
 
   // Analytics — renderer-side tracking bridge
   analytics: {

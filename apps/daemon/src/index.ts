@@ -31,6 +31,7 @@ import { SettingsService } from './settings-service.js';
 import { WorkspaceService } from './workspace-service.js';
 import { ConnectorService } from './connector-service.js';
 import { LegacyImportService } from './legacy-import-service.js';
+import { EmailService } from './email-service.js';
 // Milestone 4 of the daemon-only-SQLite migration — daemon takes over
 // ownership of Google accounts (CRUD + token refresh) and skills (CRUD +
 // disk scan). Main keeps the Electron-only parts (OAuth loopback +
@@ -218,6 +219,7 @@ async function main(): Promise<void> {
   const workspaceService = new WorkspaceService();
   const connectorService = new ConnectorService(storage);
   const legacyImportService = new LegacyImportService(storageService.getRawDatabase());
+  const emailService = new EmailService(storage);
 
   // Milestone 4 services — own Google accounts + skills.
   const googleAccountService = new GoogleAccountService(storageService.getRawDatabase(), storage);
@@ -269,6 +271,7 @@ async function main(): Promise<void> {
     workspaceService,
     connectorService,
     legacyImportService,
+    emailService,
     googleAccountService,
     skillsService,
   };

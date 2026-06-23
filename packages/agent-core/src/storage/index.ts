@@ -115,3 +115,22 @@ export {
   deleteConnector,
   clearAllConnectors,
 } from './repositories/index.js';
+
+export {
+  createEmailAccount,
+  listEmailAccounts,
+  getEmailAccount,
+  updateEmailAccount,
+  deleteEmailAccount,
+  upsertEmailMessage,
+  listEmailMessages,
+  getEmailMessage,
+  getEmailMessageByUidl,
+  markEmailMessageRead,
+  setEmailMessageStarred,
+  setEmailMessageArchived,
+  createEmailAttachment,
+  listEmailAttachments,
+  getEmailSyncState,
+  upsertEmailSyncState,
+} from './repositories/index.js';

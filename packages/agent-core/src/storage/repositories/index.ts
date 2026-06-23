@@ -105,3 +105,22 @@ export {
   setScheduledTaskEnabled,
   updateScheduledTaskLastRun,
 } from './scheduled-tasks.js';
+
+export {
+  createEmailAccount,
+  listEmailAccounts,
+  getEmailAccount,
+  updateEmailAccount,
+  deleteEmailAccount,
+  upsertEmailMessage,
+  listEmailMessages,
+  getEmailMessage,
+  getEmailMessageByUidl,
+  markEmailMessageRead,
+  setEmailMessageStarred,
+  setEmailMessageArchived,
+  createEmailAttachment,
+  listEmailAttachments,
+  getEmailSyncState,
+  upsertEmailSyncState,
+} from './email.js';

@@ -26,9 +26,14 @@ import type { SettingsService, SettingsChangePayload } from './settings-service.
 import type { WorkspaceService, WorkspaceChangePayload } from './workspace-service.js';
 import type { ConnectorService } from './connector-service.js';
 import type { LegacyImportService } from './legacy-import-service.js';
+import type { EmailService } from './email-service.js';
 import type { GoogleAccountService } from './google-account-service.js';
 import type { SkillsService } from './skills-service.js';
 import type {
+  EmailAccountSettingsUpdateInput,
+  EmailAccountWithPasswordInput,
+  EmailConnectionTestInput,
+  EmailMessageListFilters,
   GwsAccountAddInput,
   GwsAccountStatusChangedPayload,
   SkillsChangedPayload,
@@ -83,6 +88,7 @@ export interface RouteServices {
   workspaceService: WorkspaceService;
   connectorService: ConnectorService;
   legacyImportService: LegacyImportService;
+  emailService: EmailService;
   // Milestone 4 — daemon takes over Google accounts + skills ownership.
   googleAccountService: GoogleAccountService;
   skillsService: SkillsService;
@@ -105,6 +111,7 @@ export function registerRpcMethods(services: RouteServices): void {
     workspaceService,
     connectorService,
     legacyImportService,
+    emailService,
   } = services;
   const storage = services.storageService.getStorage();
 
@@ -1044,6 +1051,156 @@ export function registerRpcMethods(services: RouteServices): void {
   );
 
   // ── Legacy electron-store import (one-shot, guarded) ─────────────────────
+  // Email (POP3 foundation). Network sync is added separately; these routes
+  // expose account/message storage and keep POP3 passwords in SecureStorage.
+  rpc.registerMethod(
+    'email.accounts.list',
+    safeHandler(() => Promise.resolve(emailService.listAccounts())),
+  );
+  rpc.registerMethod(
+    'email.accounts.get',
+    safeHandler((params) => {
+      const v = validate(z.object({ accountId: z.string().min(1) }), params);
+      return Promise.resolve(emailService.getAccount(v.accountId));
+    }),
+  );
+  rpc.registerMethod(
+    'email.accounts.create',
+    safeHandler((params) => {
+      const v = validate(
+        z.object({
+          input: z.object({
+            displayName: z.string().min(1),
+            host: z.string().min(1),
+            port: z.number().int().positive(),
+            useTls: z.boolean(),
+            username: z.string().min(1),
+            password: z.string().min(1),
+            enabled: z.boolean().optional(),
+          }),
+        }),
+        params,
+      );
+      return Promise.resolve(emailService.createAccount(v.input as EmailAccountWithPasswordInput));
+    }),
+  );
+  rpc.registerMethod(
+    'email.accounts.update',
+    safeHandler((params) => {
+      const v = validate(
+        z.object({
+          accountId: z.string().min(1),
+          input: z.object({
+            displayName: z.string().min(1).optional(),
+            host: z.string().min(1).optional(),
+            port: z.number().int().positive().optional(),
+            useTls: z.boolean().optional(),
+            username: z.string().min(1).optional(),
+            password: z.string().min(1).optional(),
+            enabled: z.boolean().optional(),
+          }),
+        }),
+        params,
+      );
+      return Promise.resolve(
+        emailService.updateAccount(v.accountId, v.input as EmailAccountSettingsUpdateInput),
+      );
+    }),
+  );
+  rpc.registerMethod(
+    'email.accounts.delete',
+    safeHandler((params) => {
+      const v = validate(z.object({ accountId: z.string().min(1) }), params);
+      emailService.deleteAccount(v.accountId);
+      return Promise.resolve();
+    }),
+  );
+  rpc.registerMethod(
+    'email.account.testConnection',
+    safeHandler((params) => {
+      const v = validate(
+        z.object({
+          input: z.object({
+            accountId: z.string().min(1).optional(),
+            host: z.string().min(1),
+            port: z.number().int().positive(),
+            useTls: z.boolean(),
+            username: z.string().min(1),
+            password: z.string().min(1).optional(),
+            timeoutMs: z.number().int().positive().optional(),
+          }),
+        }),
+        params,
+      );
+      return emailService.testConnection(v.input as EmailConnectionTestInput);
+    }),
+  );
+  rpc.registerMethod(
+    'email.messages.list',
+    safeHandler((params) => {
+      const v = validate(
+        z
+          .object({
+            accountId: z.string().min(1).optional(),
+            query: z.string().optional(),
+            unreadOnly: z.boolean().optional(),
+            starredOnly: z.boolean().optional(),
+            archived: z.boolean().optional(),
+            limit: z.number().int().positive().optional(),
+            offset: z.number().int().nonnegative().optional(),
+          })
+          .optional(),
+        params,
+      );
+      return Promise.resolve(emailService.listMessages(v as EmailMessageListFilters | undefined));
+    }),
+  );
+  rpc.registerMethod(
+    'email.messages.get',
+    safeHandler((params) => {
+      const v = validate(z.object({ messageId: z.string().min(1) }), params);
+      return Promise.resolve(emailService.getMessage(v.messageId));
+    }),
+  );
+  rpc.registerMethod(
+    'email.messages.markRead',
+    safeHandler((params) => {
+      const v = validate(z.object({ messageId: z.string().min(1), read: z.boolean() }), params);
+      emailService.markMessageRead(v.messageId, v.read);
+      return Promise.resolve();
+    }),
+  );
+  rpc.registerMethod(
+    'email.messages.setStarred',
+    safeHandler((params) => {
+      const v = validate(z.object({ messageId: z.string().min(1), starred: z.boolean() }), params);
+      emailService.setMessageStarred(v.messageId, v.starred);
+      return Promise.resolve();
+    }),
+  );
+  rpc.registerMethod(
+    'email.messages.setArchived',
+    safeHandler((params) => {
+      const v = validate(z.object({ messageId: z.string().min(1), archived: z.boolean() }), params);
+      emailService.setMessageArchived(v.messageId, v.archived);
+      return Promise.resolve();
+    }),
+  );
+  rpc.registerMethod(
+    'email.attachments.list',
+    safeHandler((params) => {
+      const v = validate(z.object({ messageId: z.string().min(1) }), params);
+      return Promise.resolve(emailService.listAttachments(v.messageId));
+    }),
+  );
+  rpc.registerMethod(
+    'email.sync.getState',
+    safeHandler((params) => {
+      const v = validate(z.object({ accountId: z.string().min(1) }), params);
+      return Promise.resolve(emailService.getSyncState(v.accountId));
+    }),
+  );
+
   rpc.registerMethod(
     'legacy.importElectronStoreIfNeeded',
     safeHandler((params) => {

@@ -273,6 +273,7 @@
     "browsers": "Облачные браузеры",
     "general": "Общие",
     "integrations": "Интеграции",
+    "email": "Email",
     "scheduler": "Scheduler"
   },
   "notifications": {
@@ -359,6 +360,61 @@
       "custom": "Пользовательские"
     },
     "errorDismiss": "Закрыть"
+  },
+  "email": {
+    "formTitle": "POP3 Account",
+    "formDescription": "Save company email accounts that only support POP3.",
+    "accountsTitle": "Saved Accounts",
+    "loading": "Loading email accounts...",
+    "empty": "No POP3 accounts saved",
+    "fields": {
+      "displayName": "Display Name",
+      "username": "Username",
+      "host": "POP3 Host",
+      "port": "Port",
+      "password": "Password",
+      "useTls": "SSL/TLS",
+      "useTlsHint": "Use port 995 for standard POP3 over TLS."
+    },
+    "placeholders": {
+      "displayName": "Company mail",
+      "username": "name@company.com",
+      "host": "pop3.company.com",
+      "password": "Email password",
+      "passwordEdit": "Leave blank to keep existing password"
+    },
+    "actions": {
+      "test": "Test Connection",
+      "testing": "Testing...",
+      "save": "Save Account",
+      "update": "Update Account",
+      "saving": "Saving...",
+      "cancel": "Cancel",
+      "delete": "Delete account"
+    },
+    "deleteDialog": {
+      "title": "Удалить учётную запись?",
+      "description": "Это навсегда удалит «{{name}}» и все синхронизированные письма. Действие нельзя отменить."
+    },
+    "status": {
+      "enabled": "Enabled",
+      "disabled": "Disabled"
+    },
+    "errors": {
+      "apiUnavailable": "Email API is not available.",
+      "loadFailed": "Failed to load email accounts.",
+      "required": "Display name, host, port, and username are required.",
+      "connectionRequired": "Host, port, and username are required for a connection test.",
+      "passwordRequired": "Password is required for a new account.",
+      "saveFailed": "Failed to save email account.",
+      "deleteFailed": "Failed to delete email account.",
+      "testFailed": "Failed to test POP3 connection."
+    },
+    "test": {
+      "success": "POP3 connection succeeded. UIDL reported {{count}} message(s).",
+      "successNoUidl": "POP3 login succeeded, but this server does not support UIDL.",
+      "failed": "POP3 connection failed."
+    }
   },
   "appearance": {
     "title": "Тема",

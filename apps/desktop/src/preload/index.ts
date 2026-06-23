@@ -21,6 +21,15 @@ import type {
 } from '@accomplish_ai/agent-core/desktop-main';
 import type {
   CloudBrowserConfig,
+  EmailAccount,
+  EmailAccountSettingsUpdateInput,
+  EmailAccountWithPasswordInput,
+  EmailAttachment,
+  EmailConnectionTestInput,
+  EmailConnectionTestResult,
+  EmailMessage,
+  EmailMessageListFilters,
+  EmailSyncState,
   GoogleAccount,
   OAuthProviderId,
   ConnectorAuthStatus,
@@ -902,6 +911,37 @@ const accomplishAPI = {
   },
 
   // ── Google Workspace Accounts ────────────────────────────────────────────
+  email: {
+    listAccounts: (): Promise<EmailAccount[]> => ipcRenderer.invoke('email:accounts:list'),
+    getAccount: (accountId: string): Promise<EmailAccount | null> =>
+      ipcRenderer.invoke('email:accounts:get', accountId),
+    createAccount: (input: EmailAccountWithPasswordInput): Promise<EmailAccount> =>
+      ipcRenderer.invoke('email:accounts:create', input),
+    updateAccount: (
+      accountId: string,
+      input: EmailAccountSettingsUpdateInput,
+    ): Promise<EmailAccount | null> =>
+      ipcRenderer.invoke('email:accounts:update', accountId, input),
+    deleteAccount: (accountId: string): Promise<void> =>
+      ipcRenderer.invoke('email:accounts:delete', accountId),
+    testConnection: (input: EmailConnectionTestInput): Promise<EmailConnectionTestResult> =>
+      ipcRenderer.invoke('email:accounts:test-connection', input),
+    listMessages: (filters?: EmailMessageListFilters): Promise<EmailMessage[]> =>
+      ipcRenderer.invoke('email:messages:list', filters),
+    getMessage: (messageId: string): Promise<EmailMessage | null> =>
+      ipcRenderer.invoke('email:messages:get', messageId),
+    markMessageRead: (messageId: string, read: boolean): Promise<void> =>
+      ipcRenderer.invoke('email:messages:mark-read', messageId, read),
+    setMessageStarred: (messageId: string, starred: boolean): Promise<void> =>
+      ipcRenderer.invoke('email:messages:set-starred', messageId, starred),
+    setMessageArchived: (messageId: string, archived: boolean): Promise<void> =>
+      ipcRenderer.invoke('email:messages:set-archived', messageId, archived),
+    listAttachments: (messageId: string): Promise<EmailAttachment[]> =>
+      ipcRenderer.invoke('email:attachments:list', messageId),
+    getSyncState: (accountId: string): Promise<EmailSyncState | null> =>
+      ipcRenderer.invoke('email:sync:get-state', accountId),
+  },
+
   gws: {
     listAccounts: (): Promise<GoogleAccount[]> => ipcRenderer.invoke('gws:accounts:list'),
     startAuth: (label: string): Promise<{ state: string; authUrl: string }> =>
