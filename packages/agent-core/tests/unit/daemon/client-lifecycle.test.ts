@@ -1,6 +1,6 @@
 import { describe, expect, it, afterEach } from 'vitest';
 import { mkdtempSync, rmSync } from 'node:fs';
-import { join } from 'node:path';
+import { basename, join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { DaemonRpcServer } from '../../../src/daemon/rpc-server.js';
 import { DaemonClient } from '../../../src/daemon/client.js';
@@ -11,6 +11,11 @@ let server: DaemonRpcServer | null = null;
 
 function createTempSocketPath(): string {
   tempDir = mkdtempSync(join(tmpdir(), 'daemon-lifecycle-test-'));
+  // Windows cannot bind an AF_UNIX socket under a temp dir (EACCES); use a unique
+  // named pipe instead, mirroring getSocketPath()'s production behavior on win32.
+  if (process.platform === 'win32') {
+    return `\\\\.\\pipe\\${basename(tempDir)}`;
+  }
   return join(tempDir, 'test.sock');
 }
 

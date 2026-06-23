@@ -20,15 +20,20 @@ describe('socket-path', () => {
     mockHomedir.mockReturnValue('/Users/testuser');
   });
 
+  // These cases mock os.platform to 'darwin' but node:path is not mocked, so on a
+  // Windows host the composed path uses '\' separators. Normalize to '/' so the
+  // darwin path-composition assertions hold regardless of host OS.
+  const normalize = (p: string): string => p.replace(/\\/g, '/');
+
   describe('getDaemonDir', () => {
     it('returns ~/.accomplish', () => {
-      expect(getDaemonDir()).toBe('/Users/testuser/.accomplish');
+      expect(normalize(getDaemonDir())).toBe('/Users/testuser/.accomplish');
     });
   });
 
   describe('getSocketPath', () => {
     it('falls back to default dir when no dataDir provided', () => {
-      expect(getSocketPath()).toBe('/Users/testuser/.accomplish/daemon.sock');
+      expect(normalize(getSocketPath())).toBe('/Users/testuser/.accomplish/daemon.sock');
     });
 
     it('scopes socket to provided dataDir on macOS/Linux', () => {
@@ -70,7 +75,7 @@ describe('socket-path', () => {
 
   describe('getPidFilePath', () => {
     it('falls back to default dir when no dataDir provided', () => {
-      expect(getPidFilePath()).toBe('/Users/testuser/.accomplish/daemon.pid');
+      expect(normalize(getPidFilePath())).toBe('/Users/testuser/.accomplish/daemon.pid');
     });
 
     it('scopes PID file to provided dataDir', () => {

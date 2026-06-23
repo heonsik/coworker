@@ -638,7 +638,9 @@ describe('ConfigGenerator', () => {
       // assert on a retained MCP entry (request-connector-auth) instead.
       const command = result.mcpServers['request-connector-auth'].command;
       expect(command?.[0]).toContain('node');
-      expect(command?.[1]).toContain('dist/index.mjs');
+      // Normalize separators so the assertion holds on Windows hosts where the
+      // composed MCP entry path uses '\'.
+      expect(command?.[1]?.replace(/\\/g, '/')).toContain('dist/index.mjs');
     });
 
     it('should throw when bundled node is missing in packaged mode', () => {
@@ -667,7 +669,9 @@ describe('ConfigGenerator', () => {
       // assert on a retained MCP entry (request-connector-auth) instead.
       const command = result.mcpServers['request-connector-auth'].command;
       expect(command?.[0]).toContain('node');
-      expect(command?.[1]).toContain('dist/index.mjs');
+      // Normalize separators so the assertion holds on Windows hosts where the
+      // composed MCP entry path uses '\'.
+      expect(command?.[1]?.replace(/\\/g, '/')).toContain('dist/index.mjs');
     });
 
     it('should throw when MCP dist entry is missing', () => {

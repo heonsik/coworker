@@ -140,20 +140,16 @@ describe('CLI Resolver', () => {
       const realLauncherPath = path.join(launcherStoreRoot, 'opencode-ai');
       const cliPath = path.join(launcherStoreRoot, 'opencode-windows-x64', 'bin', 'opencode.exe');
 
-      fs.mkdirSync(launcherPath, { recursive: true });
       fs.mkdirSync(realLauncherPath, { recursive: true });
       fs.mkdirSync(path.dirname(cliPath), { recursive: true });
       fs.writeFileSync(cliPath, 'binary');
 
-      const originalRealpathSync = fs.realpathSync;
-      const realpathSpy = vi.spyOn(fs, 'realpathSync').mockImplementation(((
-        inputPath: fs.PathLike,
-      ) => {
-        if (String(inputPath) === launcherPath) {
-          return realLauncherPath;
-        }
-        return originalRealpathSync(inputPath);
-      }) as typeof fs.realpathSync);
+      // Simulate the pnpm store layout with a real NTFS junction (no admin
+      // privilege required) so the production code's fs.realpathSync resolves
+      // node_modules/opencode-ai to the .pnpm store. vitest 4 forbids spying on
+      // the immutable ESM fs namespace, so a real link is the reliable approach.
+      fs.mkdirSync(path.dirname(launcherPath), { recursive: true });
+      fs.symlinkSync(realLauncherPath, launcherPath, 'junction');
 
       const result = resolveCliPath({
         isPackaged: false,
@@ -163,8 +159,6 @@ describe('CLI Resolver', () => {
       expect(result).not.toBeNull();
       expect(result?.source).toBe('local');
       expect(result?.cliPath).toBe(cliPath);
-
-      realpathSpy.mockRestore();
     });
   });
 
